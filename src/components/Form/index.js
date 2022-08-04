@@ -15,22 +15,26 @@ const Form = () => {
   };
 
   return (
-    <article className="add-note">
-      <span>jumlah karakter: {inputLength}/50</span>
-      <TextInput
-        inputValue={handleInputLength}
-        placeholder="masukkan judul disini..."
-      />
+    <section>
+      <h2 className="title">buat catatan</h2>
 
-      <textarea
-        value={inputDescription}
-        onChange={(e) => setInputDescription(e.target.value)}
-        placeholder="masukkan deskripsi disini..."
-        autoComplete="off"
-      ></textarea>
+      <article className="add-note">
+        <span>jumlah karakter: {inputLength}/50</span>
+        <TextInput
+          inputValue={handleInputLength}
+          placeholder="masukkan judul disini..."
+        />
 
-      <Button btnFor="submit" title="buat" />
-    </article>
+        <textarea
+          value={inputDescription}
+          onChange={(e) => setInputDescription(e.target.value)}
+          placeholder="masukkan deskripsi disini..."
+          autoComplete="off"
+        ></textarea>
+
+        <Button btnFor="submit" title="buat" />
+      </article>
+    </section>
   );
 };
 

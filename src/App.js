@@ -31,19 +31,15 @@ const App = () => {
         <h1>notes</h1>
       </nav>
 
-      <main>
-        <section className="d-flex align-items-center gap-10 mb-10">
-          <h2 className="title w-300">buat catatan</h2>
+      <main className="d-flex gap-10">
+        <Form />
 
+        <section>
           <TextInput
             icon
             inputValue={(value) => setSearch(value)}
             placeholder="cari judul catatan disini..."
           />
-        </section>
-
-        <section className="d-flex gap-10">
-          <Form />
 
           {/* list note */}
           <div className="list-note">
@@ -52,27 +48,23 @@ const App = () => {
                 onClick={() => setContainerExpand("active")}
                 className="head d-flex align-items-center justify-content-between"
               >
-                <h2 className="title align-start">catatan aktif</h2>
+                <h2 className="title">catatan aktif</h2>
                 <ToggleExpand isExpanded={isActiveExpand} />
               </div>
 
-              <Masonry
-                breakpointCols={breakpointColumnsObj}
-                className={`my-masonry-grid notes-container ${
-                  isActiveExpand ? "expand" : ""
-                }`}
-                columnClassName="my-masonry-grid_column"
-              >
-                {data.map((item, index) => (
-                  <Card key={index} item={item} />
-                ))}
-              </Masonry>
-
-              {/* <div
+              <div
                 className={`notes-container ${isActiveExpand ? "expand" : ""}`}
               >
-               
-              </div> */}
+                <Masonry
+                  breakpointCols={breakpointColumnsObj}
+                  className="my-masonry-grid"
+                  columnClassName="my-masonry-grid_column"
+                >
+                  {data.map((item, index) => (
+                    <Card key={index} item={item} />
+                  ))}
+                </Masonry>
+              </div>
             </article>
 
             <article className="archive">
@@ -90,6 +82,12 @@ const App = () => {
             </article>
           </div>
         </section>
+
+        {/* <section className="d-flex align-items-center gap-10 mb-10">
+
+        </section> */}
+
+        <section className="d-flex gap-10"></section>
       </main>
     </>
   );

@@ -99,18 +99,7 @@ nav h1 {
   font-size: 20px;
   opacity: 0.1;
   text-align: center;
-}
-
-.title.align-start {
-  text-align: start;
-}
-
-.title.w-300 {
-  width: 300px;
-}
-
-.mb-10 {
-  margin-bottom: 10px;
+  margin: 8px 0;
 }
 
 .text-input {
@@ -121,7 +110,6 @@ nav h1 {
   align-items: center;
   gap: 10px;
   box-shadow: var(--shadow);
-  flex: 1;
 }
 
 .text-input:focus-within {
@@ -145,6 +133,11 @@ nav h1 {
 
 .list-note {
   flex: 1;
+  margin-top: 10px;
+}
+
+.list-note .title {
+  margin: 0;
 }
 
 .active,
@@ -163,16 +156,16 @@ nav h1 {
   background-color: #2222221a;
   border-radius: 10px;
   height: 0;
-  transition: all 0.5s ease;
+  transition: all 1s ease;
   padding: 0;
+  overflow-x: hidden;
 }
 
 .notes-container.expand {
   margin-top: 10px;
   height: calc(100vh - 260px);
   overflow-x: auto;
-  padding: 10px;
-  padding-bottom: 50px;
+  padding: 10px 5px;
   /* min-height: 110px; */
 }
 
@@ -195,12 +188,12 @@ nav h1 {
 
 /* !:: component card :: */
 .card {
-  transition: var(--transition);
   background-color: white;
   height: fit-content;
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 10px;
+  transition: var(--transition);
 }
 
 .card h3 {
@@ -247,6 +240,7 @@ nav h1 {
   padding: 10px;
   border-radius: 10px;
   width: 300px;
+  margin-top: 20px;
 }
 
 .add-note span {
