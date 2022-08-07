@@ -79,6 +79,10 @@ nav h1 {
   padding: 10px 0;
 }
 
+section:nth-child(2) {
+  flex: 1;
+}
+
 .d-flex {
   display: flex;
 }
@@ -93,6 +97,10 @@ nav h1 {
 
 .gap-10 {
   gap: 10px;
+}
+
+.gap-5 {
+  gap: 5px;
 }
 
 .title {
@@ -132,7 +140,6 @@ nav h1 {
 }
 
 .list-note {
-  flex: 1;
   margin-top: 10px;
 }
 
@@ -187,6 +194,42 @@ nav h1 {
   background-clip: padding-box;
 }
 
+/* !:: component icon action :: */
+.icon-action {
+  background-color: transparent;
+  padding: 2px;
+  height: 16px;
+  width: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.icon-action.yellow {
+  background-color: #e6b325;
+}
+
+.icon-action.red {
+  background-color: #eb4747;
+}
+
+.icon-action.green {
+  background-color: #5bb318;
+}
+
+.icon-action .icon {
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.icon-action.visible .icon {
+  opacity: 1;
+}
+
 /* !:: component card :: */
 .card {
   background-color: #fae3d9;
@@ -199,7 +242,7 @@ nav h1 {
   color: #222222cc;
 }
 
-.card div {
+.card .header {
   background-color: #ffc7c7;
   margin: -10px;
   margin-bottom: 5px;
@@ -224,6 +267,13 @@ nav h1 {
   /* transition-delay: 0.3s; */
   transform: translateY(-3px);
   box-shadow: var(--shadow);
+}
+
+/* !:: component empty state :: */
+.empty-state {
+  margin-top: 20px;
+  text-align: center;
+  color: var(--clr-white);
 }
 
 /* !:: component icon :: */

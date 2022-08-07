@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 
-const TextInput = ({ inputValue, placeholder, icon }) => {
+const TextInput = ({ reloadKey, inputValue, placeholder, icon }) => {
   const [value, setValue] = useState("");
 
   const handleInputLength = (e) => {
@@ -10,6 +10,10 @@ const TextInput = ({ inputValue, placeholder, icon }) => {
     setValue(e.target.value);
     inputValue(e.target.value);
   };
+
+  useEffect(() => {
+    if (reloadKey) setValue("");
+  }, [reloadKey]);
 
   return (
     <div className="text-input">
@@ -21,6 +25,7 @@ const TextInput = ({ inputValue, placeholder, icon }) => {
         value={value}
         onChange={handleInputLength}
         placeholder={placeholder}
+        required
       />
     </div>
   );
