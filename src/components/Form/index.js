@@ -35,6 +35,7 @@ const Form = ({ data, setData }) => {
   const clearForm = () => {
     setReloadForm(reloadForm + 1);
     setInputDescription("");
+    setInputLength(0);
   };
 
   return (

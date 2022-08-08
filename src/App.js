@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Masonry from "react-masonry-css";
 import Card from "./components/Card";
 import Form from "./components/Form";
 import TextInput from "./components/TextInput";
-import ToggleExpand from "./components/ToggleExpand";
 import { initialData } from "./utils";
 import moment from "moment";
 import localization from "moment/locale/id";
@@ -14,21 +13,22 @@ import EmptyState from "./components/EmpyState";
 const App = () => {
   moment.updateLocale("id", localization);
 
+  const [search, setSearch] = useState("");
   const [data, setData] = useState(initialData);
   const notesActive = data.filter((item) => !item.archived);
   const notesArchive = data.filter((item) => item.archived);
 
-  // const [notesActive, setNotesActive] = useState(
-  //   data.filter((item) => !item.archived)
-  // );
-  // const [notesArchive, setNotesArchive] = useState(
-  //   data.filter((item) => item.archived)
-  // );
-
   const isNoDataNotesActive = notesActive.length === 0;
   const isNoDataNotesArchive = notesArchive.length === 0;
+  const isNoDataNotesActiveOnSearch =
+    notesActive.filter((item) =>
+      item.title.toLowerCase().includes(search.toLowerCase())
+    ).length === 0;
+  const isNoDataNotesArchiveOnSearch =
+    notesArchive.filter((item) =>
+      item.title.toLowerCase().includes(search.toLowerCase())
+    ).length === 0;
 
-  const [search, setSearch] = useState("");
   const [containerExpand, setContainerExpand] = useState("active");
   const [isMouseOverTheHeaderActive, setIsMouseOverTheHeaderActive] =
     useState(false);
@@ -50,31 +50,13 @@ const App = () => {
     );
 
     setData(onToggleArchive);
-    // setNotesActive(onToggleArchive.filter((item) => !item.archived));
-    // setNotesArchive(onToggleArchive.filter((item) => item.archived));
   };
 
   const handleDelete = (id) => {
     const onDelete = data.filter((item) => item.id !== id);
 
     setData(onDelete);
-    // setNotesActive(onDelete.filter((item) => !item.archived));
-    // setNotesArchive(onDelete.filter((item) => item.archived));
   };
-
-  useEffect(() => {
-    const onSearch = data.filter((item) =>
-      item.title.toLowerCase().includes(search.toLowerCase())
-    );
-
-    // setNotesActive(onSearch.filter((item) => !item.archived));
-    // setNotesArchive(onSearch.filter((item) => item.archived));
-  }, [search]);
-
-  // useEffect(() => {
-  //   setNotesActive(data.filter((item) => !item.archived));
-  //   setNotesArchive(data.filter((item) => item.archived));
-  // }, [data.length]);
 
   return (
     <>
@@ -129,21 +111,27 @@ const App = () => {
               <div
                 className={`notes-container ${isActiveExpand ? "expand" : ""}`}
               >
-                {isNoDataNotesActive && <EmptyState />}
+                {(isNoDataNotesActive || isNoDataNotesActiveOnSearch) && (
+                  <EmptyState />
+                )}
                 {!isNoDataNotesActive && (
                   <Masonry
                     breakpointCols={breakpointColumnsObj}
                     className="my-masonry-grid"
                     columnClassName="my-masonry-grid_column"
                   >
-                    {notesActive.map((item, index) => (
-                      <Card
-                        onDelete={() => handleDelete(item.id)}
-                        onToggleArchive={() => handleToggleArchive(item.id)}
-                        key={index}
-                        item={item}
-                      />
-                    ))}
+                    {notesActive
+                      .filter((item) =>
+                        item.title.toLowerCase().includes(search.toLowerCase())
+                      )
+                      .map((item, index) => (
+                        <Card
+                          onDelete={() => handleDelete(item.id)}
+                          onToggleArchive={() => handleToggleArchive(item.id)}
+                          key={index}
+                          item={item}
+                        />
+                      ))}
                   </Masonry>
                 )}
               </div>
@@ -184,21 +172,27 @@ const App = () => {
               <div
                 className={`notes-container ${isArchiveExpand ? "expand" : ""}`}
               >
-                {isNoDataNotesArchive && <EmptyState />}
+                {(isNoDataNotesArchive || isNoDataNotesArchiveOnSearch) && (
+                  <EmptyState />
+                )}
                 {!isNoDataNotesArchive && (
                   <Masonry
                     breakpointCols={breakpointColumnsObj}
                     className="my-masonry-grid"
                     columnClassName="my-masonry-grid_column"
                   >
-                    {notesArchive.map((item, index) => (
-                      <Card
-                        onDelete={() => handleDelete(item.id)}
-                        onToggleArchive={() => handleToggleArchive(item.id)}
-                        key={index}
-                        item={item}
-                      />
-                    ))}
+                    {notesArchive
+                      .filter((item) =>
+                        item.title.toLowerCase().includes(search.toLowerCase())
+                      )
+                      .map((item, index) => (
+                        <Card
+                          onDelete={() => handleDelete(item.id)}
+                          onToggleArchive={() => handleToggleArchive(item.id)}
+                          key={index}
+                          item={item}
+                        />
+                      ))}
                   </Masonry>
                 )}
               </div>
